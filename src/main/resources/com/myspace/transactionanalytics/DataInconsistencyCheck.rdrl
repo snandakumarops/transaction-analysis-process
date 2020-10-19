@@ -1,0 +1,12 @@
+package com.myspace.transactionanalytics;
+
+import java.lang.Number;
+
+rule "DataInconsistencyCheck"
+	dialect "mvel"
+	ruleflow-group "data-inconsistency-check"
+	when
+		transaction : Transaction( transactionAmount == 0.0 )
+	then
+		transaction.setInconsistencyFlagged( true );
+end
